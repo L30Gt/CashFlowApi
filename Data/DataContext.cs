@@ -16,14 +16,23 @@ namespace CashFlowApi.Data
         }
 
         public DbSet<Lancamento> TB_LANCAMENTOS { get; set; }
+        public DbSet<Categoria> TB_CATEGORIAS { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Lancamento>().HasData
             (
-                new Lancamento() { Id = 1, TipoLancamento = TipoLancamentoEnum.Receita, Descricao = "Salario de Novembro", Valor = 5000.00m, DataLancamento = new DateTime(2023, 11, 25)},
-                new Lancamento() { Id = 2, TipoLancamento = TipoLancamentoEnum.Despesa, Descricao = "Aluguel de Novembro", Valor = 1200.00m, DataLancamento = new DateTime(2023, 11, 10)}
+                new Lancamento() { Id = 1, TipoLancamento = TipoLancamentoEnum.Receita, Descricao = "Salario de Novembro", Valor = 5000.00m, DataLancamento = new DateTime(2023, 11, 25) },
+                new Lancamento() { Id = 2, TipoLancamento = TipoLancamentoEnum.Despesa, Descricao = "Aluguel de Novembro", Valor = 1200.00m, DataLancamento = new DateTime(2023, 11, 10) }
             );
+
+            modelBuilder.Entity<Categoria>().HasData
+            (
+                new Categoria() { Id = 1, Nome = "Salario"},
+                new Categoria() { Id = 2, Nome = "Aluguel"}
+            );
+
         }
     }
 }
