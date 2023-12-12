@@ -12,7 +12,7 @@ namespace CashFlowApi.Models
         public int Id { get; set; }
         public TipoLancamentoEnum TipoLancamento { get; set; }
         public string Descricao { get; set; } = string.Empty;
-        
+
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal Valor { get; set; }
