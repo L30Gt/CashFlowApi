@@ -33,7 +33,7 @@ namespace CashFlowApi.Controllers
 
                 if (categoria == null)
                     throw new System.Exception("Categoria não encontrada.");
-                
+
                 LancamentoCategoria lc = new LancamentoCategoria();
                 lc.Lancamento = lancamento;
                 lc.Categoria = categoria;
@@ -47,6 +47,67 @@ namespace CashFlowApi.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetLancamentoCategoria(int id)
+        {
+            try
+            {
+                List<LancamentoCategoria> lcLista = new List<LancamentoCategoria>();
+                lcLista = await _context.TB_LANCAMENTOCATEGORIAS
+                .Include(l => l.Lancamento)
+                .Include(l => l.Categoria)
+                .Where(l => l.CategoriaId == id).ToListAsync();
+
+                return Ok(lcLista);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetCategorias")]
+        public async Task<IActionResult> GetCategorias()
+        {
+                try
+            {
+                List<Categoria> categorias = new List<Categoria>();
+                categorias = await _context.TB_CATEGORIAS.ToListAsync();
+                return Ok(categorias);
+            }
+            
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("DeleteLancamentoCategoria")]
+        public async Task<IActionResult> DeleteLancamentoCategoria(LancamentoCategoria lc)
+        {
+            try
+            {
+                LancamentoCategoria lcRemover = await _context.TB_LANCAMENTOCATEGORIAS
+                    .FirstOrDefaultAsync(lBusca => lBusca.LancamentoId == lc.LancamentoId && lBusca.CategoriaId == lc.CategoriaId);
+
+                if (lcRemover == null)
+                {
+                    throw new System.Exception("Personagem ou Habilidades não encontrados");
+                }
+
+                _context.TB_LANCAMENTOCATEGORIAS.Remove(lcRemover);
+
+                int linhasAfetadas = await _context.SaveChangesAsync();
+                return Ok(linhasAfetadas);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

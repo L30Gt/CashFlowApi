@@ -26,6 +26,7 @@ namespace CashFlowApi.Controllers
             try
             {
                 Lancamento l = await _context.TB_LANCAMENTOS
+                    .Include(pr => pr.Usuario)
                     .Include(lc => lc.LancamentoCategorias)
                         .ThenInclude(c => c.Categoria)
                     .FirstOrDefaultAsync(lBusca => lBusca.Id == id);
