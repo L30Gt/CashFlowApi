@@ -19,6 +19,9 @@ namespace CashFlowApi.Models
         public DateTime DataLancamento { get; set; }
 
         public Usuario? Usuario { get; set; }
+
+        public List<LancamentoCategoria> LancamentoCategorias { get; set; }
+
     }
 
 }

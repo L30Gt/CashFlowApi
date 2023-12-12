@@ -19,6 +19,7 @@ namespace CashFlowApi.Data
         public DbSet<Lancamento> TB_LANCAMENTOS { get; set; }
         public DbSet<Usuario> TB_USUARIOS { get; set; }
         public DbSet<Categoria> TB_CATEGORIAS { get; set; }
+        public DbSet<LancamentoCategoria> TB_LANCAMENTOCATEGORIAS { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,6 +36,15 @@ namespace CashFlowApi.Data
                 new Categoria() { Id = 2, Nome = "Aluguel"}
             );
             
+            modelBuilder.Entity<LancamentoCategoria>()
+                .HasKey(lc => new {lc.LancamentoId, lc.CategoriaId});
+            
+            modelBuilder.Entity<LancamentoCategoria>().HasData
+            (
+                new LancamentoCategoria() { LancamentoId = 1, CategoriaId = 1},
+                new LancamentoCategoria() { LancamentoId = 2, CategoriaId = 2}
+            );
+
             Usuario user = new Usuario();
             Criptografia.CriarPasswordHash("123456", out byte[] hash, out byte []salt);
             user.Id = 1;
