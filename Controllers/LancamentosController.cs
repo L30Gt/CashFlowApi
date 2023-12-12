@@ -20,6 +20,7 @@ namespace CashFlowApi.Controllers
         {
             _context = context;
         }
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSingle(int id)
         {
