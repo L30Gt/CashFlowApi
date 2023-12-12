@@ -15,7 +15,9 @@ namespace CashFlowApi.Models
 
         [NotMapped]
         public string PasswordString { get; set; }
-        public DateTime DataAcesso { get; set; }
+        public DateTime? DataAcesso { get; set; }
+
+        public List<Lancamento> Lancamentos { get; set; }
     }
 
 }

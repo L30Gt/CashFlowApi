@@ -17,6 +17,8 @@ namespace CashFlowApi.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Valor { get; set; }
         public DateTime DataLancamento { get; set; }
+
+        public Usuario? Usuario { get; set; }
     }
 
 }
