@@ -8,8 +8,8 @@ namespace CashFlowApi.Models
     public class LancamentoCategoria
     {
         public int LancamentoId { get; set; }
-        public Lancamento Lancamento { get; set; }
+        public Lancamento? Lancamento { get; set; }
         public int CategoriaId { get; set; }
-        public Categoria Categoria { get; set; }
+        public Categoria? Categoria { get; set; }
     }
 }
